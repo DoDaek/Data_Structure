@@ -25,16 +25,18 @@ void push(Queue *queue, int key){
     if(queue->rear == NULL){
         queue->front = added;
         queue->rear = added;
+    } else {
+        queue->rear->next = added;
+        queue->rear = added;
     }
-
-    queue->rear->next = added;
-    queue->rear = added;
 }
 
-void pop(Queue *queue){
+int pop(Queue *queue){
+    int re;
+
     if(queue->rear == NULL){
-        printf("%d\n", -1);
-        return;
+        //printf("%d\n", -1);
+        return -1;
     }
 
     QNode *removed = queue->front;
@@ -44,14 +46,16 @@ void pop(Queue *queue){
         queue->rear = NULL;
     }
 
-    printf("%d\n", removed->data);
+    re = removed->data;
+    //printf("%d\n", removed->data);
     free(removed);
+    return re;
 }
 
-void size(Queue *queue){
+int size(Queue *queue){
     if(queue->rear == NULL){
-        printf("%d\n", 0);
-        return;
+        //printf("%d\n", 0);
+        return 0;
     }
 
     QNode *head;
@@ -64,31 +68,36 @@ void size(Queue *queue){
         head = head->next;
     }
 
-    printf("%d\n", size);
+    //printf("%d\n", size);
     //free(head);
+    return size;
 }
 
-void empty(Queue *queue){
+int empty(Queue *queue){
     if(queue->rear == NULL){
-        printf("%d\n", 1);
+        //printf("%d\n", 1);
+        return 1;
     } else {
-        printf("%d\n", 0);
+        //printf("%d\n", 0);
+        return 0;
     }
 }
 
-void front(Queue *queue){
+int front(Queue *queue){
     if(queue->rear == NULL){
-        printf("%d\n", -1);
-        return;
+        //printf("%d\n", -1);
+        return -1;
     }
-    printf("%d\n", (queue->front)->data);
+    //printf("%d\n", (queue->front)->data);
+    return (queue->front)->data;
 }
 
-void back(Queue *queue){
+int back(Queue *queue){
     if(queue->rear == NULL){
-        printf("%d\n", -1);
-        return;
+        //printf("%d\n", -1);
+        return -1;
     }
-    printf("%d\n", (queue->rear)->data);
+    //printf("%d\n", (queue->rear)->data);
+    return (queue->rear)->data;
 }
 
